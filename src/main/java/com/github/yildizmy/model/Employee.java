@@ -1,6 +1,5 @@
 package com.github.yildizmy.model;
 
-import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvBindByPosition;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +21,6 @@ public class Employee {
     private Long id;
 
     @CsvBindByPosition(position = 1)
-    @CsvBindByName
     private String name;
 
     @CsvBindByPosition(position = 2)
@@ -46,11 +44,11 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return id.equals(employee.id);
+        return email.equals(employee.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(email);
     }
 }
