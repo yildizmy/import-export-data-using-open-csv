@@ -12,7 +12,7 @@ Project used for exporting data as CSV file in Spring Boot using OpenCSV.
 * Spring Web
 * Spring Boot
 * Spring Data JPA
-* Apache Commons CSV
+* OpenCSV
 * H2 Database
 
 
