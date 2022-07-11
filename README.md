@@ -1,5 +1,5 @@
-# Export &amp; Download Data as CSV File in Spring Boot using OpenCSV
-Project used for exporting data as CSV file in Spring Boot using OpenCSV.
+# Export & Download Data as csv file using OpenCSV
+Project used for exporting data as csv file using OpenCSV.
 
 ## Description
 
