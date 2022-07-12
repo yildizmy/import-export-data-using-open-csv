@@ -1,4 +1,4 @@
-# Export & Download Data as csv file using OpenCSV
+# Export Data as CSV using OpenCSV
 Project used for exporting data as csv file using OpenCSV.
 
 ## Description
