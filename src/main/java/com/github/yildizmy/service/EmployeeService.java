@@ -18,8 +18,7 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
     public List<EmployeeDto> findAll() {
-        return employeeRepository.findAll()
-                .stream()
+        return employeeRepository.findAll().stream()
                 .map(EmployeeDto::new)
                 .collect(Collectors.toList());
     }
