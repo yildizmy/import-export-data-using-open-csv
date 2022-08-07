@@ -39,6 +39,10 @@ Class | Method                                                                  
 *EmployeeController* | [**deleteAll**](http://localhost:8080/api/v1/employees)                 | **DELETE** /employees   | Delete all employees
 
 
+## Documentation
+[Access a File from the Classpath in a Spring Application](https://www.baeldung.com/spring-classpath-file-access#3-using-resourceloader)<br/>
+
+
 ## Authors
 Murat Yıldız
 
