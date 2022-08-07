@@ -73,6 +73,13 @@ public class EmployeeController {
         CsvHelper.generateCsv(response.getWriter(), employees);
     }
 
+    @DeleteMapping("/employees/{id}")
+    public ResponseEntity<ApiResponse<CommandDto>> deleteById(@PathVariable Long id) {
+        final CommandDto response = employeeService.deleteById(id);
+        return ResponseEntity
+                .ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESSFULLY_DELETED, response));
+    }
+
     @DeleteMapping("/employees")
     public ResponseEntity<ApiResponse<CommandDto>> deleteAll() {
         employeeService.deleteAll();
