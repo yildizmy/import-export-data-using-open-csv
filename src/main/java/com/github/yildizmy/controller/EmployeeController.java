@@ -17,8 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import static com.github.yildizmy.common.Constants.CONTENT_TYPE;
-import static com.github.yildizmy.common.Constants.FILE_NAME;
+import static com.github.yildizmy.common.Constants.*;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -42,6 +41,12 @@ public class EmployeeController {
         Resource resource =resourceLoader.getResource("classpath:data/" + fileName + ".json");
         List<EmployeeRequest> requests = mapper.readValue(resource.getFile(), new TypeReference<>() {});
         final List<EmployeeDto> employees = employeeService.create(requests);
+        return ResponseEntity.ok(employees);
+    }
+
+    @GetMapping("/employees")
+    public ResponseEntity<List<EmployeeDto>> findAll() {
+        final List<EmployeeDto> employees = employeeService.findAll();
         return ResponseEntity.ok(employees);
     }
 

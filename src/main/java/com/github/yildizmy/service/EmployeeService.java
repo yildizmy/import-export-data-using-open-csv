@@ -9,20 +9,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class EmployeeService {
-
-    // TODO: Add Global Exception Handling
 
     private final EmployeeRepository employeeRepository;
 
     public List<EmployeeDto> findAll() {
         return employeeRepository.findAll().stream()
                 .map(EmployeeDto::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public EmployeeDto create(EmployeeRequest request) {
@@ -33,8 +30,8 @@ public class EmployeeService {
     public List<EmployeeDto> create(List<EmployeeRequest> requests) {
         final List<Employee> employees = requests.stream()
                 .map(EmployeeRequestMapper::mapToEntity)
-                .collect(Collectors.toList());
+                .toList();
         final List<Employee> saved = employeeRepository.saveAll(employees);
-        return saved.stream().map(EmployeeDto::new).collect(Collectors.toList());
+        return saved.stream().map(EmployeeDto::new).toList();
     }
 }
