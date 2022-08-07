@@ -28,14 +28,15 @@ jdbc:h2:tcp://localhost:9092/mem:employee-db
 
 All URIs are relative to *http://localhost:8080/api/v1*
 
-Class | Method                                                                      | HTTP request                  | Description
------------- |-----------------------------------------------------------------------------|-------------------------------| -------------
-*EmployeeController* | [**create**](http://localhost:8080/api/v1/employees)                | **POST** /employees           | Create an employee
+Class | Method                                                                  | HTTP request                  | Description
+------------ |-------------------------------------------------------------------------|-------------------------------| -------------
+*EmployeeController* | [**create**](http://localhost:8080/api/v1/employees)                    | **POST** /employees           | Create an employee
 *EmployeeController* | [**createFromFile**](http://localhost:8080/api/v1/employees/{fileName}) | **POST** /employees/{fileName} | Create employees from given JSON file
-*EmployeeController* | [**findAll**](http://localhost:8080/api/v1/employees) | **GET** /employees            | Get all employees
-*EmployeeController* | [**findByEmail**](http://localhost:8080/api/v1/employees/{email}) | **GET** /employees/{email}    | Get employee by email
-*EmployeeController* | [**export**](http://localhost:8080/api/v1/employees/export)        | **GET** /employees/export     | Export employee list to CSV file
-*EmployeeController* | [**export**](http://localhost:8080/api/v1/employees)         | **DELETE** /employees   | Delete all employees
+*EmployeeController* | [**findByEmail**](http://localhost:8080/api/v1/employees/{email})       | **GET** /employees/{email}    | Get employee by email
+*EmployeeController* | [**findAll**](http://localhost:8080/api/v1/employees)                   | **GET** /employees            | Get all employees
+*EmployeeController* | [**export**](http://localhost:8080/api/v1/employees/export)             | **GET** /employees/export     | Export employee list to CSV file
+*EmployeeController* | [**deleteById**](http://localhost:8080/api/v1/employees/{id})           | **DELETE** /employees/{id}   | Delete employee by id
+*EmployeeController* | [**deleteAll**](http://localhost:8080/api/v1/employees)                 | **DELETE** /employees   | Delete all employees
 
 
 ## Authors
