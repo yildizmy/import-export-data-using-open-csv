@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class EmployeeService {
 
+    // TODO: Add Global Exception Handling
+
     private final EmployeeRepository employeeRepository;
 
     public List<EmployeeDto> findAll() {
@@ -23,10 +25,16 @@ public class EmployeeService {
                 .collect(Collectors.toList());
     }
 
-    public void create(List<EmployeeRequest> request) {
-        final List<Employee> employees = request.stream()
+    public EmployeeDto create(EmployeeRequest request) {
+        final Employee employee = EmployeeRequestMapper.mapToEntity(request);
+        return new EmployeeDto(employeeRepository.save(employee));
+    }
+
+    public List<EmployeeDto> create(List<EmployeeRequest> requests) {
+        final List<Employee> employees = requests.stream()
                 .map(EmployeeRequestMapper::mapToEntity)
                 .collect(Collectors.toList());
-        employeeRepository.saveAll(employees);
+        final List<Employee> saved = employeeRepository.saveAll(employees);
+        return saved.stream().map(EmployeeDto::new).collect(Collectors.toList());
     }
 }

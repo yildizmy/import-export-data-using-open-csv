@@ -24,6 +24,7 @@ public class Employee {
     private String name;
 
     @CsvBindByPosition(position = 2)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @CsvBindByPosition(position = 3)
