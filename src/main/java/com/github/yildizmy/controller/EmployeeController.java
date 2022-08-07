@@ -57,4 +57,10 @@ public class EmployeeController {
         List<EmployeeDto> employees = employeeService.findAll();
         CsvHelper.generateCsv(response.getWriter(), employees);
     }
+
+    @DeleteMapping("/employees")
+    public ResponseEntity<String> deleteAll() {
+        employeeService.deleteAll();
+        return ResponseEntity.ok(SUCCESSFULLY_DELETED);
+    }
 }

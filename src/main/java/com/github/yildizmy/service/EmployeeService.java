@@ -34,4 +34,8 @@ public class EmployeeService {
         final List<Employee> saved = employeeRepository.saveAll(employees);
         return saved.stream().map(EmployeeDto::new).toList();
     }
+
+    public void deleteAll() {
+        employeeRepository.deleteAll();
+    }
 }
