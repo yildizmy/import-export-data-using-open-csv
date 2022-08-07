@@ -3,7 +3,7 @@ Project used for exporting data as csv file using OpenCSV.
 
 ## Description
 
-...
+Employee list can be populated by using `employees_request.json` file and corresponding endpoint.
 
 ## Getting Started
 
