@@ -19,17 +19,17 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
-    public List<EmployeeDto> findAll() {
-        return employeeRepository.findAll().stream()
-                .map(EmployeeDto::new)
-                .toList();
-    }
-
     // if @NaturalId is used for email field of Employee then findBySimpleNaturalId() method is used instead of findByEmail()
     public EmployeeDto findByEmail(String email) {
         return employeeRepository.findByEmail(email)
                 .map(EmployeeDto::new)
                 .orElseThrow(() -> new EntityNotFoundException(ENTITY_NOT_FOUND));
+    }
+
+    public List<EmployeeDto> findAll() {
+        return employeeRepository.findAll().stream()
+                .map(EmployeeDto::new)
+                .toList();
     }
 
     public EmployeeDto create(EmployeeRequest request) {

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import static com.github.yildizmy.common.Constants.FAILED_TO_IMPORT;
 import static com.opencsv.ICSVWriter.*;
 
 @SuppressWarnings("java:S1118")
@@ -32,7 +33,7 @@ public class CsvHelper {
             // close the writer
             writer.close();
         } catch (CsvDataTypeMismatchException | CsvRequiredFieldEmptyException ex) {
-            throw new IOException("Failed to import data to CSV file: " + ex.getMessage());
+            throw new IOException(FAILED_TO_IMPORT + ex.getMessage());
         }
     }
 }

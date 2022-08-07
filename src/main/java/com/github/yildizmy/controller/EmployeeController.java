@@ -3,6 +3,8 @@ package com.github.yildizmy.controller;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.yildizmy.dto.request.EmployeeRequest;
+import com.github.yildizmy.dto.response.ApiResponse;
+import com.github.yildizmy.dto.response.CommandDto;
 import com.github.yildizmy.dto.response.EmployeeDto;
 import com.github.yildizmy.service.EmployeeService;
 import com.github.yildizmy.util.CsvHelper;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.Clock;
+import java.time.Instant;
 import java.util.List;
 
 import static com.github.yildizmy.common.Constants.*;
@@ -24,49 +28,55 @@ import static com.github.yildizmy.common.Constants.*;
 @RequiredArgsConstructor
 public class EmployeeController {
 
+    private final Clock clock;
     private final ResourceLoader resourceLoader;
     private final ObjectMapper mapper;
     private final EmployeeService employeeService;
 
     @PostMapping("/employees")
-    public ResponseEntity<EmployeeDto> create(
+    public ResponseEntity<ApiResponse<EmployeeDto>> create(
             @RequestBody EmployeeRequest request) {
         final EmployeeDto employee = employeeService.create(request);
-        return ResponseEntity.ok(employee);
+        return ResponseEntity
+                .ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESSFULLY_CREATED, employee));
     }
 
     @PostMapping("/employees/{fileName}")
-    public ResponseEntity<List<EmployeeDto>> createFromFile(
+    public ResponseEntity<ApiResponse<CommandDto>> createFromFile(
             @PathVariable("fileName") String fileName) throws IOException {
-        Resource resource =resourceLoader.getResource("classpath:data/" + fileName + ".json");
-        List<EmployeeRequest> requests = mapper.readValue(resource.getFile(), new TypeReference<>() {});
-        final List<EmployeeDto> employees = employeeService.create(requests);
-        return ResponseEntity.ok(employees);
-    }
-
-    @GetMapping("/employees")
-    public ResponseEntity<List<EmployeeDto>> findAll() {
-        final List<EmployeeDto> employees = employeeService.findAll();
-        return ResponseEntity.ok(employees);
+        final Resource resource = resourceLoader.getResource("classpath:data/" + fileName + ".json");
+        final List<EmployeeRequest> requests = mapper.readValue(resource.getFile(), new TypeReference<>() {});
+        employeeService.create(requests);
+        return ResponseEntity
+                .ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESSFULLY_CREATED));
     }
 
     @GetMapping("/employees/{email}")
-    public ResponseEntity<EmployeeDto> findByEmail(@PathVariable String email) {
+    public ResponseEntity<ApiResponse<EmployeeDto>> findByEmail(@PathVariable String email) {
         final EmployeeDto employee = employeeService.findByEmail(email);
-        return ResponseEntity.ok(employee);
+        return ResponseEntity
+                .ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, employee));
+    }
+
+    @GetMapping("/employees")
+    public ResponseEntity<ApiResponse<List<EmployeeDto>>> findAll() {
+        final List<EmployeeDto> employees = employeeService.findAll();
+        return ResponseEntity
+                .ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, employees));
     }
 
     @GetMapping("employees/export")
     public void export(HttpServletResponse response) throws IOException {
         response.setContentType(CONTENT_TYPE);
         response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + FILE_NAME);
-        List<EmployeeDto> employees = employeeService.findAll();
+        final List<EmployeeDto> employees = employeeService.findAll();
         CsvHelper.generateCsv(response.getWriter(), employees);
     }
 
     @DeleteMapping("/employees")
-    public ResponseEntity<String> deleteAll() {
+    public ResponseEntity<ApiResponse<CommandDto>> deleteAll() {
         employeeService.deleteAll();
-        return ResponseEntity.ok(SUCCESSFULLY_DELETED);
+        return ResponseEntity
+                .ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESSFULLY_DELETED));
     }
 }
