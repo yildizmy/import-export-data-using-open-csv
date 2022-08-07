@@ -26,13 +26,25 @@ jdbc:h2:tcp://localhost:9092/mem:employee-db
 
 <br/>
 
-### Executing program
 
-* Postman request:
 
-```
-http://localhost:8080/api/v1/employees/export
-```
+
+### API Endpoints
+
+All URIs are relative to *http://localhost:8080/api/v1*
+
+Class | Method                                                                        | HTTP request               | Description
+------------ |-------------------------------------------------------------------------------|----------------------------| -------------
+*EmployeeController* | [**create**](http://localhost:8080/api/v1/employees)                  | **POST** /employees        | Create an employee
+*EmployeeController* | [**createFromFile**](http://localhost:8080/api/v1/employees/{fileName}) | **POST** /employees/{fileName} | Create employees from given JSON file
+*EmployeeController* | [**export**](http://localhost:8080/api/v1/employees/export)          | **GET** /employees/export  | Export employee list to CSV file
+
+
+
+
+
+
+
 
 
 
