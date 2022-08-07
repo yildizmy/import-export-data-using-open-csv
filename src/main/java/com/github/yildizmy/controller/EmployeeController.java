@@ -50,6 +50,12 @@ public class EmployeeController {
         return ResponseEntity.ok(employees);
     }
 
+    @GetMapping("/employees/{email}")
+    public ResponseEntity<EmployeeDto> findByEmail(@PathVariable String email) {
+        final EmployeeDto employee = employeeService.findByEmail(email);
+        return ResponseEntity.ok(employee);
+    }
+
     @GetMapping("employees/export")
     public void export(HttpServletResponse response) throws IOException {
         response.setContentType(CONTENT_TYPE);
