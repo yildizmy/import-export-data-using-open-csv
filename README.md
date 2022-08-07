@@ -1,6 +1,7 @@
 # Export Data as CSV using OpenCSV
 Project used for exporting data as csv file using OpenCSV.
 
+
 ## Description
 
 Employee list can be populated by using `employees_request.json` file and corresponding endpoint.
@@ -15,7 +16,6 @@ Employee list can be populated by using `employees_request.json` file and corres
 * OpenCSV
 * H2 Database
 
-
 ### Installing
 
 * Database connection url for DBeaver, etc.
@@ -23,11 +23,6 @@ Employee list can be populated by using `employees_request.json` file and corres
 ```
 jdbc:h2:tcp://localhost:9092/mem:employee-db
 ```
-
-<br/>
-
-
-
 
 ### API Endpoints
 
@@ -43,16 +38,9 @@ Class | Method                                                                  
 *EmployeeController* | [**export**](http://localhost:8080/api/v1/employees)         | **DELETE** /employees   | Delete all employees
 
 
-
-
-
-
-
-
-
-
 ## Authors
 Murat Yıldız
+
 
 ## Version History
 
@@ -62,9 +50,11 @@ Murat Yıldız
 * 0.1
   * Initial Release
 
+
 ## License
 
 ...
+
 
 ## Acknowledgments
 ...
