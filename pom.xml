@@ -14,7 +14,7 @@
 	<name>export-data-as-csv-file-using-open-csv</name>
 	<description>Export &amp; Download Data as CSV File in Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
