@@ -10,10 +10,11 @@ public class EmployeeRequestMapper {
 
     public static Employee mapToEntity(EmployeeRequest request) {
         return new Employee(
-                request.getName(),
+                request.getFirstName(),
+                request.getLastName(),
                 request.getEmail(),
                 request.getCountry(),
-                request.getAge()
+                request.getDateOfBirth()
         );
     }
 }

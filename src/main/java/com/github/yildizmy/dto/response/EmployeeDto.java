@@ -4,20 +4,24 @@ import com.github.yildizmy.model.Employee;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @NoArgsConstructor
 public class EmployeeDto {
     private Long id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
     private String country;
-    private int age;
+    private LocalDate dateOfBirth;
 
     public EmployeeDto(Employee employee) {
         this.id = employee.getId();
-        this.name = employee.getName();
+        this.firstName = employee.getFirstName();
+        this.lastName = employee.getLastName();
         this.email = employee.getEmail();
         this.country = employee.getCountry();
-        this.age = employee.getAge();
+        this.dateOfBirth = employee.getDateOfBirth();
     }
 }

@@ -34,35 +34,29 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @PostMapping("/employees")
-    public ResponseEntity<ApiResponse<EmployeeDto>> create(
-            @RequestBody EmployeeRequest request) {
+    public ResponseEntity<ApiResponse<EmployeeDto>> create(@RequestBody EmployeeRequest request) {
         final EmployeeDto employee = employeeService.create(request);
-        return ResponseEntity
-                .ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESSFULLY_CREATED, employee));
+        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESSFULLY_CREATED, employee));
     }
 
     @PostMapping("/employees/{fileName}")
-    public ResponseEntity<ApiResponse<CommandDto>> createFromFile(
-            @PathVariable("fileName") String fileName) throws IOException {
+    public ResponseEntity<ApiResponse<CommandDto>> createFromFile(@PathVariable("fileName") String fileName) throws IOException {
         final Resource resource = resourceLoader.getResource("classpath:data/" + fileName + ".json");
         final List<EmployeeRequest> requests = mapper.readValue(resource.getFile(), new TypeReference<>() {});
         employeeService.create(requests);
-        return ResponseEntity
-                .ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESSFULLY_CREATED));
+        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESSFULLY_CREATED));
     }
 
     @GetMapping("/employees/{email}")
     public ResponseEntity<ApiResponse<EmployeeDto>> findByEmail(@PathVariable String email) {
         final EmployeeDto employee = employeeService.findByEmail(email);
-        return ResponseEntity
-                .ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, employee));
+        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, employee));
     }
 
     @GetMapping("/employees")
     public ResponseEntity<ApiResponse<List<EmployeeDto>>> findAll() {
         final List<EmployeeDto> employees = employeeService.findAll();
-        return ResponseEntity
-                .ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, employees));
+        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, employees));
     }
 
     @GetMapping("employees/export")
@@ -76,14 +70,12 @@ public class EmployeeController {
     @DeleteMapping("/employees/{id}")
     public ResponseEntity<ApiResponse<CommandDto>> deleteById(@PathVariable Long id) {
         final CommandDto response = employeeService.deleteById(id);
-        return ResponseEntity
-                .ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESSFULLY_DELETED, response));
+        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESSFULLY_DELETED, response));
     }
 
     @DeleteMapping("/employees")
     public ResponseEntity<ApiResponse<CommandDto>> deleteAll() {
         employeeService.deleteAll();
-        return ResponseEntity
-                .ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESSFULLY_DELETED));
+        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESSFULLY_DELETED));
     }
 }
