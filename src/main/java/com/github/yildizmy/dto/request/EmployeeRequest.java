@@ -29,6 +29,7 @@ public class EmployeeRequest {
     @JsonProperty("country")
     private String country;
 
+    // set format for reading/writing from/to JSON (same date format as in the file)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_PATTERN)
     @JsonProperty("date_of_birth")
     private LocalDate dateOfBirth;
