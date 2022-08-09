@@ -6,7 +6,7 @@ public class Constants {
     public static final String TRACE = "trace";
     public static final String FILE_NAME = "employees.csv";
     public static final String CONTENT_TYPE = "text/csv";
-    public static final String DATE_PATTERN = "dd.MM.yyyy";
+    public static final String DATE_PATTERN = "dd/MM/yyyy";
 
     // TODO: Move to message.properties file after applying i18n
     public static final String SUCCESS = "Success";
