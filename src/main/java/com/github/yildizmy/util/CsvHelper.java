@@ -28,19 +28,19 @@ public class CsvHelper {
             String[] columns = {"id", "firstName", "lastName", "email", "country", "dateOfBirth"};
 
             // create a mapping strategy
-            ColumnPositionMappingStrategy strategy = new ColumnPositionMappingStrategy();
+            ColumnPositionMappingStrategy<EmployeeRequest> strategy = new ColumnPositionMappingStrategy<>();
             strategy.setType(EmployeeRequest.class);
             strategy.setColumnMapping(columns);
 
             // create csv bean reader
-            CsvToBean csvToBean = new CsvToBeanBuilder(reader)
+            CsvToBean<EmployeeRequest> csvToBean = new CsvToBeanBuilder<EmployeeRequest>(reader)
                     .withMappingStrategy(strategy)
                     .withSkipLines(1)
                     .withIgnoreLeadingWhiteSpace(true)
                     .build();
 
             // iterate through employees
-            for (EmployeeRequest request : (Iterable<EmployeeRequest>) csvToBean) {
+            for (EmployeeRequest request : csvToBean) {
                 EmployeeRequest employee = new EmployeeRequest(
                         request.getFirstName(),
                         request.getLastName(),
