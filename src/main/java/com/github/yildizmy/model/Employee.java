@@ -3,6 +3,7 @@ package com.github.yildizmy.model;
 import com.opencsv.bean.CsvBindByPosition;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -21,19 +22,24 @@ public class Employee {
     @CsvBindByPosition(position = 0)
     private Long id;
 
+    @NonNull
     @CsvBindByPosition(position = 1)
     private String firstName;
 
+    @NonNull
     @CsvBindByPosition(position = 2)
     private String lastName;
 
+    @NonNull
     @CsvBindByPosition(position = 3)
     @Column(nullable = false, unique = true)
     private String email;
 
+    @NonNull
     @CsvBindByPosition(position = 4)
     private String country;
 
+    @NonNull
     @CsvBindByPosition(position = 5)
     private LocalDate dateOfBirth;
 
