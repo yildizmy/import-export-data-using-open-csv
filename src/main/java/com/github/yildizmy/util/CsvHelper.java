@@ -16,7 +16,7 @@ import static com.opencsv.ICSVWriter.*;
 @SuppressWarnings("java:S1118")
 public class CsvHelper {
 
-    public static void generateCsv(PrintWriter writer, List<EmployeeDto> employees) throws IOException {
+    public static void exportToCsv(PrintWriter writer, List<EmployeeDto> employees) throws IOException {
         try {
             // create a csv writer
             StatefulBeanToCsv<EmployeeDto> beanWriter = new StatefulBeanToCsvBuilder<EmployeeDto>(writer)
