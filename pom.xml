@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.github.yildizmy</groupId>
-	<artifactId>export-data-as-csv-file-using-open-csv</artifactId>
+	<artifactId>import-export-data-using-open-csv</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>export-data-as-csv-file-using-open-csv</name>
-	<description>Export &amp; Download Data as CSV File in Spring Boot</description>
+	<name>import-export-data-using-open-csv</name>
+	<description>Spring Boot application for import/export data in csv format using OpenCSV</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
