@@ -44,15 +44,16 @@ jdbc:h2:tcp://localhost:9092/mem:employee-db
 
 All URIs are relative to *http://localhost:8080/api/v1*
 
-Class | Method                                                                  | HTTP request                  | Description
------------- |-------------------------------------------------------------------------|-------------------------------| -------------
-*EmployeeController* | [**create**](http://localhost:8080/api/v1/employees)                    | **POST** /employees           | Create an employee
-*EmployeeController* | [**createFromFile**](http://localhost:8080/api/v1/employees/{fileName}) | **POST** /employees/{fileName} | Create employees from given JSON file
-*EmployeeController* | [**findByEmail**](http://localhost:8080/api/v1/employees/{email})       | **GET** /employees/{email}    | Get employee by email
-*EmployeeController* | [**findAll**](http://localhost:8080/api/v1/employees)                   | **GET** /employees            | Get all employees
-*EmployeeController* | [**export**](http://localhost:8080/api/v1/employees/export)             | **GET** /employees/export     | Export employee list to CSV file
-*EmployeeController* | [**deleteById**](http://localhost:8080/api/v1/employees/{id})           | **DELETE** /employees/{id}   | Delete employee by id
-*EmployeeController* | [**deleteAll**](http://localhost:8080/api/v1/employees)                 | **DELETE** /employees   | Delete all employees
+Class | Method                                                        | HTTP request         | Description
+------------ |---------------------------------------------------------------|----------------------| -------------
+*EmployeeController* | [**create**](http://localhost:8080/api/v1/employees)          | **POST** /employees  | Create an employee
+*EmployeeController* | [**createFromFile**](http://localhost:8080/api/v1/employees/{fileName:.+}) | **POST** /employees/{fileName:.+} | Create employees from given JSON file
+*EmployeeController* | [**importFromCsv**](http://localhost:8080/api/v1/employees/import/{fileName:.+}) | **POST** /employees/import/{fileName:.+} | Import employees from given CSV file
+*EmployeeController* | [**exportToCsv**](http://localhost:8080/api/v1/employees/export/{fileName:.+})   | **GET** /employees/export/{fileName:.+} | Export employees to CSV file
+*EmployeeController* | [**findByEmail**](http://localhost:8080/api/v1/employees/{email}) | **GET** /employees/{email} | Get employee by email
+*EmployeeController* | [**findAll**](http://localhost:8080/api/v1/employees)         | **GET** /employees   | Get all employees
+*EmployeeController* | [**deleteById**](http://localhost:8080/api/v1/employees/{id}) | **DELETE** /employees/{id} | Delete employee by id
+*EmployeeController* | [**deleteAll**](http://localhost:8080/api/v1/employees)       | **DELETE** /employees | Delete all employees
 
 
 ## Documentation
