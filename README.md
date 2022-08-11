@@ -78,5 +78,5 @@ Murat Yıldız
 ...
 
 
-## Acknowledgments
+## Acknowledgements
 ...
