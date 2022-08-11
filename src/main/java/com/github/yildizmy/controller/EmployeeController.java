@@ -39,12 +39,27 @@ public class EmployeeController {
         return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESSFULLY_CREATED, employee));
     }
 
-    @PostMapping("/employees/{fileName}")
+    @PostMapping("/employees/{fileName:.+}")
     public ResponseEntity<ApiResponse<CommandDto>> createFromFile(@PathVariable("fileName") String fileName) throws IOException {
-        final Resource resource = resourceLoader.getResource("classpath:data/" + fileName + ".json");
+        final Resource resource = resourceLoader.getResource("classpath:data/" + fileName);
         final List<EmployeeRequest> requests = mapper.readValue(resource.getFile(), new TypeReference<>() {});
         employeeService.create(requests);
         return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESSFULLY_CREATED));
+    }
+
+    @PostMapping("/employees/import/{fileName:.+}")
+    public ResponseEntity<ApiResponse<CommandDto>> importFromCsv(@PathVariable("fileName") String fileName) {
+        final List<EmployeeRequest> requests = CsvHelper.importFromCsv(fileName);
+        employeeService.create(requests);
+        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESSFULLY_CREATED));
+    }
+
+    @GetMapping("employees/export/{fileName:.+}")
+    public void exportToCsv(HttpServletResponse response, @PathVariable("fileName") String fileName) throws IOException {
+        response.setContentType(CONTENT_TYPE);
+        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName);
+        final List<EmployeeDto> employees = employeeService.findAll();
+        CsvHelper.exportToCsv(response.getWriter(), employees);
     }
 
     @GetMapping("/employees/{email}")
@@ -57,14 +72,6 @@ public class EmployeeController {
     public ResponseEntity<ApiResponse<List<EmployeeDto>>> findAll() {
         final List<EmployeeDto> employees = employeeService.findAll();
         return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, employees));
-    }
-
-    @GetMapping("employees/export")
-    public void export(HttpServletResponse response) throws IOException {
-        response.setContentType(CONTENT_TYPE);
-        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + FILE_NAME);
-        final List<EmployeeDto> employees = employeeService.findAll();
-        CsvHelper.generateCsv(response.getWriter(), employees);
     }
 
     @DeleteMapping("/employees/{id}")
