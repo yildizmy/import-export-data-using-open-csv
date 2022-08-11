@@ -4,9 +4,9 @@ package com.github.yildizmy.common;
 public class Constants {
 
     public static final String TRACE = "trace";
-    public static final String FILE_NAME = "employees.csv";
     public static final String CONTENT_TYPE = "text/csv";
-    public static final String DATE_PATTERN = "dd/MM/yyyy";
+    public static final String DATE_PATTERN_FOR_EXPORT = "dd/MM/yyyy";
+    public static final String DATE_PATTERN_FOR_IMPORT = "yyyy-MM-dd";
 
     // TODO: Move to message.properties file after applying i18n
     public static final String SUCCESS = "Success";
