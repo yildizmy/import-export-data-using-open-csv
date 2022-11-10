@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.yildizmy.dto.request.EmployeeRequest;
 import com.github.yildizmy.dto.response.ApiResponse;
-import com.github.yildizmy.dto.response.CommandDto;
+import com.github.yildizmy.dto.response.CommandResponse;
 import com.github.yildizmy.dto.response.EmployeeDto;
 import com.github.yildizmy.service.EmployeeService;
 import com.github.yildizmy.util.CsvHelper;
@@ -40,7 +40,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees/{fileName:.+}")
-    public ResponseEntity<ApiResponse<CommandDto>> createFromFile(@PathVariable("fileName") String fileName) throws IOException {
+    public ResponseEntity<ApiResponse<CommandResponse>> createFromFile(@PathVariable("fileName") String fileName) throws IOException {
         final Resource resource = resourceLoader.getResource("classpath:data/" + fileName);
         final List<EmployeeRequest> requests = mapper.readValue(resource.getFile(), new TypeReference<>() {});
         employeeService.create(requests);
@@ -48,7 +48,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees/import/{fileName:.+}")
-    public ResponseEntity<ApiResponse<CommandDto>> importFromCsv(@PathVariable("fileName") String fileName) {
+    public ResponseEntity<ApiResponse<CommandResponse>> importFromCsv(@PathVariable("fileName") String fileName) {
         final List<EmployeeRequest> requests = CsvHelper.importFromCsv(fileName);
         employeeService.create(requests);
         return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESSFULLY_CREATED));
@@ -75,13 +75,13 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/employees/{id}")
-    public ResponseEntity<ApiResponse<CommandDto>> deleteById(@PathVariable Long id) {
-        final CommandDto response = employeeService.deleteById(id);
+    public ResponseEntity<ApiResponse<CommandResponse>> deleteById(@PathVariable Long id) {
+        final CommandResponse response = employeeService.deleteById(id);
         return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESSFULLY_DELETED, response));
     }
 
     @DeleteMapping("/employees")
-    public ResponseEntity<ApiResponse<CommandDto>> deleteAll() {
+    public ResponseEntity<ApiResponse<CommandResponse>> deleteAll() {
         employeeService.deleteAll();
         return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESSFULLY_DELETED));
     }

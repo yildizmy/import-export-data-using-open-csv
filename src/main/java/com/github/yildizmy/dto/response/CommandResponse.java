@@ -7,6 +7,6 @@ import lombok.Value;
 @Value
 @RequiredArgsConstructor
 @Builder
-public class CommandDto {
+public class CommandResponse {
     Long id;
 }
