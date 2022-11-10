@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
-public class EmployeeDto {
+public class EmployeeResponse {
     private Long id;
     private String firstName;
     private String lastName;
@@ -16,7 +16,7 @@ public class EmployeeDto {
     private String country;
     private LocalDate dateOfBirth;
 
-    public EmployeeDto(Employee employee) {
+    public EmployeeResponse(Employee employee) {
         this.id = employee.getId();
         this.firstName = employee.getFirstName();
         this.lastName = employee.getLastName();

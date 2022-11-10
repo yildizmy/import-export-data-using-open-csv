@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.yildizmy.dto.request.EmployeeRequest;
 import com.github.yildizmy.dto.response.ApiResponse;
 import com.github.yildizmy.dto.response.CommandResponse;
-import com.github.yildizmy.dto.response.EmployeeDto;
+import com.github.yildizmy.dto.response.EmployeeResponse;
 import com.github.yildizmy.service.EmployeeService;
 import com.github.yildizmy.util.CsvHelper;
 import lombok.RequiredArgsConstructor;
@@ -34,8 +34,8 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @PostMapping("/employees")
-    public ResponseEntity<ApiResponse<EmployeeDto>> create(@RequestBody EmployeeRequest request) {
-        final EmployeeDto employee = employeeService.create(request);
+    public ResponseEntity<ApiResponse<EmployeeResponse>> create(@RequestBody EmployeeRequest request) {
+        final EmployeeResponse employee = employeeService.create(request);
         return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESSFULLY_CREATED, employee));
     }
 
@@ -58,19 +58,19 @@ public class EmployeeController {
     public void exportToCsv(HttpServletResponse response, @PathVariable("fileName") String fileName) throws IOException {
         response.setContentType(CONTENT_TYPE);
         response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName);
-        final List<EmployeeDto> employees = employeeService.findAll();
+        final List<EmployeeResponse> employees = employeeService.findAll();
         CsvHelper.exportToCsv(response.getWriter(), employees);
     }
 
     @GetMapping("/employees/{email}")
-    public ResponseEntity<ApiResponse<EmployeeDto>> findByEmail(@PathVariable String email) {
-        final EmployeeDto employee = employeeService.findByEmail(email);
+    public ResponseEntity<ApiResponse<EmployeeResponse>> findByEmail(@PathVariable String email) {
+        final EmployeeResponse employee = employeeService.findByEmail(email);
         return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, employee));
     }
 
     @GetMapping("/employees")
-    public ResponseEntity<ApiResponse<List<EmployeeDto>>> findAll() {
-        final List<EmployeeDto> employees = employeeService.findAll();
+    public ResponseEntity<ApiResponse<List<EmployeeResponse>>> findAll() {
+        final List<EmployeeResponse> employees = employeeService.findAll();
         return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, employees));
     }
 

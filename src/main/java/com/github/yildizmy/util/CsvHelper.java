@@ -1,7 +1,7 @@
 package com.github.yildizmy.util;
 
 import com.github.yildizmy.dto.request.EmployeeRequest;
-import com.github.yildizmy.dto.response.EmployeeDto;
+import com.github.yildizmy.dto.response.EmployeeResponse;
 import com.opencsv.bean.*;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
@@ -59,10 +59,10 @@ public class CsvHelper {
         return employees;
     }
 
-    public static void exportToCsv(PrintWriter writer, List<EmployeeDto> employees) throws IOException {
+    public static void exportToCsv(PrintWriter writer, List<EmployeeResponse> employees) throws IOException {
         try {
             // create a csv writer
-            StatefulBeanToCsv<EmployeeDto> beanWriter = new StatefulBeanToCsvBuilder<EmployeeDto>(writer)
+            StatefulBeanToCsv<EmployeeResponse> beanWriter = new StatefulBeanToCsvBuilder<EmployeeResponse>(writer)
                     .withSeparator(DEFAULT_SEPARATOR)
                     .withQuotechar(NO_QUOTE_CHARACTER)
                     .withEscapechar(DEFAULT_ESCAPE_CHARACTER)
