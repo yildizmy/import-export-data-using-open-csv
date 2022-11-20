@@ -4,12 +4,12 @@ import com.github.yildizmy.dto.mapper.EmployeeRequestMapper;
 import com.github.yildizmy.dto.request.EmployeeRequest;
 import com.github.yildizmy.dto.response.CommandResponse;
 import com.github.yildizmy.dto.response.EmployeeResponse;
-import com.github.yildizmy.exception.EntityNotFoundException;
 import com.github.yildizmy.model.Employee;
 import com.github.yildizmy.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 import static com.github.yildizmy.common.Constants.ENTITY_NOT_FOUND;
