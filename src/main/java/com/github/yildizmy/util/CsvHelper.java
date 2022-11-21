@@ -24,7 +24,7 @@ public class CsvHelper {
             InputStream inputStream = new ClassPathResource("data/" + fileName).getInputStream();
             Reader reader = new BufferedReader(new InputStreamReader(inputStream));
 
-            // columns name
+            // column names
             String[] columns = {"id", "firstName", "lastName", "email", "country", "dateOfBirth"};
 
             // create a mapping strategy
