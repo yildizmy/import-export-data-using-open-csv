@@ -6,6 +6,7 @@ import com.opencsv.bean.*;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -21,8 +22,11 @@ public class CsvHelper {
         List<EmployeeRequest> employees = new ArrayList<>();
         try {
             // create a reader
-            InputStream inputStream = new ClassPathResource("data/" + fileName).getInputStream();
-            Reader reader = new BufferedReader(new InputStreamReader(inputStream));
+            Resource resource = new ClassPathResource("data/" + fileName);
+            Reader reader = new FileReader(resource.getFile());
+
+            // can also be created using BufferedReader
+            // Reader reader = new BufferedReader(new InputStreamReader(resource.getInputStream()));
 
             // column names
             String[] columns = {"id", "firstName", "lastName", "email", "country", "dateOfBirth"};
