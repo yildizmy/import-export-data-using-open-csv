@@ -16,4 +16,5 @@ public class Constants {
     public static final String ENTITY_NOT_FOUND = "Item not found";
     public static final String UNKNOWN_ERROR = "Unknown error occurred";
     public static final String FAILED_TO_IMPORT = "Failed to import data to csv file: ";
+    public static final String MAX_UPLOAD_SIZE_EXCEEDED="Maximum upload size exceeded";
 }

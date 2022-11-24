@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.persistence.EntityNotFoundException;
@@ -23,7 +24,7 @@ import static com.github.yildizmy.common.Constants.*;
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @Value("${reflecting.trace:false}")
+    @Value("${reflectoring.trace:false}")
     private boolean printStackTrace;
 
     @Override
@@ -45,6 +46,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                                                                 WebRequest request) {
         log.error(ENTITY_NOT_FOUND, ex);
         return buildErrorResponse(ex, HttpStatus.NOT_FOUND, request);
+    }
+
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    @ResponseStatus(HttpStatus.PAYLOAD_TOO_LARGE)
+    public ResponseEntity<Object> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException ex, WebRequest request) {
+        log.error(MAX_UPLOAD_SIZE_EXCEEDED, ex);
+        return buildErrorResponse(ex, MAX_UPLOAD_SIZE_EXCEEDED, HttpStatus.PAYLOAD_TOO_LARGE, request);
     }
 
     @ExceptionHandler(Exception.class)
