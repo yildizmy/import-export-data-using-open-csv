@@ -2,7 +2,6 @@ package com.github.yildizmy.service;
 
 import com.github.yildizmy.dto.mapper.EmployeeRequestMapper;
 import com.github.yildizmy.dto.request.EmployeeRequest;
-import com.github.yildizmy.dto.response.CommandResponse;
 import com.github.yildizmy.dto.response.EmployeeResponse;
 import com.github.yildizmy.model.Employee;
 import com.github.yildizmy.repository.EmployeeRepository;
@@ -46,11 +45,10 @@ public class EmployeeService {
         return saved.stream().map(EmployeeResponse::new).toList();
     }
 
-    public CommandResponse deleteById(Long id) {
+    public void deleteById(Long id) {
         final Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(ENTITY_NOT_FOUND));
         employeeRepository.delete(employee);
-        return CommandResponse.builder().id(id).build();
     }
 
     public void deleteAll() {
