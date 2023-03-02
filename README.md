@@ -12,7 +12,7 @@ Spring Boot provides some properties with which we can add the exception message
 server.error.include-message=always
 server.error.include-binding-errors=always
 server.error.include-stacktrace=on_param
-server.error.include-exception=true
+server.error.include-exception=false
 ```
 
 Using these Spring Boot server properties in our `application.properties` we can alter the error response to some extent.
