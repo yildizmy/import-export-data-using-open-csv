@@ -3,6 +3,7 @@ package com.github.yildizmy.common;
 public final class Constants {
 
     private Constants() {
+        throw new UnsupportedOperationException(CLASS_CANNOT_BE_INSTANTIATED);
     }
 
     public static final String TRACE = "trace";
@@ -17,4 +18,5 @@ public final class Constants {
     public static final String UNKNOWN_ERROR = "Unknown error occurred";
     public static final String FAILED_TO_IMPORT = "Failed to import data to csv file: ";
     public static final String MAX_UPLOAD_SIZE_EXCEEDED = "Maximum upload size exceeded";
+    public static final String CLASS_CANNOT_BE_INSTANTIATED = "This is a utility class and cannot be instantiated";
 }
