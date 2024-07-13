@@ -17,7 +17,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Objects;
-import java.util.Optional;
 
 import static com.github.yildizmy.common.Constants.*;
 
@@ -59,9 +58,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<Object> handleAllUncaughtException(Exception ex, WebRequest request) {
-        String message = Optional.ofNullable(ex.getMessage()).orElse(UNKNOWN_ERROR);
-        log.error(message, ex);
-        return buildErrorResponse(ex, message, HttpStatus.INTERNAL_SERVER_ERROR, request);
+        log.error(ex.getMessage(), ex);
+        return buildErrorResponse(ex, HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
     private ResponseEntity<Object> buildErrorResponse(Exception ex,
