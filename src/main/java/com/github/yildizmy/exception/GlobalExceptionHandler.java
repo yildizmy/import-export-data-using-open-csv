@@ -37,6 +37,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
             errorResponse.addValidationError(fieldError.getField(), fieldError.getDefaultMessage());
         }
+        log.error(METHOD_ARGUMENT_NOT_VALID, ex);
         return ResponseEntity.unprocessableEntity().body(errorResponse);
     }
 
