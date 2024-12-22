@@ -3,7 +3,7 @@ package com.github.yildizmy.service;
 import com.github.yildizmy.dto.mapper.EmployeeRequestMapper;
 import com.github.yildizmy.dto.request.EmployeeRequest;
 import com.github.yildizmy.dto.response.EmployeeResponse;
-import com.github.yildizmy.model.Employee;
+import com.github.yildizmy.domain.Employee;
 import com.github.yildizmy.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

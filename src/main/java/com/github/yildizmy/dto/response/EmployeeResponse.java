@@ -1,6 +1,6 @@
 package com.github.yildizmy.dto.response;
 
-import com.github.yildizmy.model.Employee;
+import com.github.yildizmy.domain.Employee;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
